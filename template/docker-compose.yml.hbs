@@ -1,0 +1,50 @@
+version: "3.5"
+services:
+  screeps:
+    container_name: "screeps"
+    image: "screepers/screeps-launcher"
+    depends_on:
+      - redis
+      - mongo
+    volumes:
+      - ./STEAM_KEY:/screeps/STEAM_KEY
+      - ./config.yml:/screeps/config.yml
+      - server-data:/screeps
+    networks:
+      - {{ network }}
+    ports:
+      - "21025:21025"
+    environment:
+      MONGO_HOST: mongo
+      REDIS_HOST: redis
+    restart: {{ restartPolicy }}
+
+  mongo:
+    container_name: "mongo"
+    image: "mongo:{{ mongoVersion}}"
+    networks:
+      - {{ network }}
+    volumes:
+      - mongo-data:/data/db
+    expose:
+      - 27017
+    restart: {{ restartPolicy }}
+
+  redis:
+    container_name: "redis"
+    image: "redis:{{ redisVersion}}"
+    networks:
+      - {{ network }}
+    volumes:
+      - redis-data:/data
+    expose:
+      - 6379
+    restart: {{ restartPolicy }}
+
+networks:
+  {{ network }}:
+
+volumes:
+  server-data:
+  mongo-data:
+  redis-data:

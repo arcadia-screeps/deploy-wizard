@@ -1,0 +1,60 @@
+{
+    "summary": "A deploy tool for private screeps server",
+    "description": "A deploy tool for private screeps server. Based on screeps-launcher\n\nAvailable 2 presets:\n1. primary: deploy on bare metal server.\n2. advanced: deploy in docker",
+    "options": {
+        "version": {
+            "description": "output the current version"
+        }
+    },
+    "commands": {
+        "cli": {
+            "description": "connect and open screeps-launcher cli in container"
+        },
+        "config": {
+            "description": "configure cli",
+            "list": {
+                "description": "display the current configuration"
+            },
+            "get": {
+                "args": {
+                    "name": "config key"
+                },
+                "description": "read a configuration settings"
+            },
+            "set": {
+                "args": {
+                    "name": "config key",
+                    "value": "config value"
+                },
+                "description": "change a configuration settings",
+                "options": {
+                    "number": "specify config value as number type"
+                }
+            },
+            "delete": {
+                "args": {
+                    "names": "key array of configuration settings to delete"
+                },
+                "description": "delete a configuration settings"
+            }
+        },
+        "logs": {
+            "description": "output screeps-server logs"
+        },
+        "init": {
+            "description": "create config.yml (and docker-compose.yml) file"
+        },
+        "outdated": {
+            "description": "check if screeps-deploy-wizard is outdated"
+        },
+        "restart": {
+            "description": "restart screeps service"
+        },
+        "start": {
+            "description": "start running screeps service with docker"
+        },
+        "stop": {
+            "description": "stop screeps service and remove containers"
+        }
+    }
+}

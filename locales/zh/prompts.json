@@ -1,0 +1,49 @@
+{
+    "selectPreset": {
+        "message": "选择预设",
+        "choices": {
+            "primary": "用于裸金属服务器或 docker 部署。禁用 screepsmod-mongo。输出产物是 config.yaml",
+            "advanced": "用于 docker compose 部署。强制启用 screepsmod-mongo。输出产物是 config.yaml 与 docker-compose.yaml"
+        }
+    },
+    "selectMods": {
+        "message": "选择要安装的 mod",
+        "choices": {
+            "admin-utils": "提供一系列实用工具，用于私有服务器管理。",
+            "auth": "提供认证功能",
+            "features": "提供特性管理功能",
+            "map-tool": "提供地图管理功能",
+            "mongo": "搭配使用MongoDB和Redis替代默认内置的LokiJS存储。",
+            "pure-automation": "禁用所有UI操作，玩家需要自动化一切",
+            "remote-console": "允许玩家通过SSH远程访问他们在私有服务器上的控制台。"
+        }
+    },
+    "inputShardName": "输入shard名称",
+    "inputTickRate": "输入tick速率，以毫秒为单位。（任何正数都是有效的，但建议大于1000，否则私服的玩家可能会抱怨 tick 太快）",
+    "inputMaptoolUser": "输入地图工具 mod 的用户名",
+    "inputMaptoolPass": "输入地图工具 mod 的密码",
+    "inputNetwork": "输入 docker compose 运行服务使用的网络名",
+    "inputMongoVolume": "输入保存 mongo 数据的卷的名称",
+    "inputRedisVolume": "输入保存 redis 数据的卷的名称",
+    "selectRestartPolicy": {
+        "message": "选择服务的重启策略",
+        "choices": {
+            "always": "只要容器退出就重启，不管是否手动退出",
+            "no": "不重启",
+            "on-failure": "当容器非正常退出（退出状态码非0）时重启",
+            "unless-stopped": "当容器退出时重启，直到手动停止"
+        }
+    },
+    "selectMongoVersion": {
+        "message": "",
+        "choices": {
+            "2.6.4": ""
+        }
+    },
+    "selectRedisVersion": {
+        "message": "",
+        "choices": {
+            "3.0.6": ""
+        }
+    }
+}

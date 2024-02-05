@@ -1,0 +1,18 @@
+mods:
+{{#each mods }}
+- screepsmod-{{ this }}
+{{/each }}
+bots:
+  simplebot: "screepsbot-zeswarm"
+
+serverConfig:
+{{#with serverConfig }}
+  constants:
+  tickRate: {{ tickRate }}
+  shardName: {{ shardName }}
+{{#if maptool }}
+  maptool:
+    user: {{ maptool.user }}
+    pass: {{ maptool.pass }}
+{{/if}}
+{{/with}}

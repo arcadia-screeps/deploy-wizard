@@ -1,0 +1,60 @@
+{
+    "summary": "一个 screeps 私人服务器部署工具",
+    "description": "一个 screeps 私人服务器部署工具，基于 screeps-launcher\n\n有两个预设可选：\n1. 基础: 在裸服务器上部署.\n2. 高级: 在 docker 上部署",
+    "options": {
+        "version": {
+            "description": "查看版本号"
+        }
+    },
+    "commands": {
+        "cli": {
+            "description": "连接并打开容器中的 screeps-launcher cli "
+        },
+        "config": {
+            "description": "对脚手架进行配置",
+            "list": {
+                "description": "显示当前所有配置"
+            },
+            "get": {
+                "args": {
+                    "name": "配置项的键名"
+                },
+                "description": "查看某个配置项"
+            },
+            "set": {
+                "args": {
+                    "name": "配置项的键名",
+                    "value": "配置项的值"
+                },
+                "description": "修改某个配置项",
+                "options": {
+                    "number": "指定配置项值类型为数值型"
+                }
+            },
+            "delete": {
+                "args": {
+                    "names": "配置项键名的列表"
+                },
+                "description": "删除某个配置项"
+            }
+        },
+        "logs": {
+            "description": "输出 screeps-server 容器日志"
+        },
+        "init": {
+            "description": "创建 config.yml (以及 docker-compose.yml) 文件"
+        },
+        "outdated": {
+            "description": "查看 screeps-deploy-wizard 版本是否已过时"
+        },
+        "restart": {
+            "description": "重启 screeps 服务"
+        },
+        "start": {
+            "description": "开始用 docker 运行 screeps 服务"
+        },
+        "stop": {
+            "description": "停止 screeps 服务并移除所有容器"
+        }
+    }
+}

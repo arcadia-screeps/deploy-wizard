@@ -1,0 +1,49 @@
+{
+    "selectPreset": {
+        "message": "Select preset",
+        "choices": {
+            "primary": "Used for bare-metal or docker deployment. Disable screepsmod-mongo. The output is config.yaml",
+            "advanced": "Used for docker-compose deployment. Force enable screepsmod-mongo. The output is config.yaml and docker-compose.yaml"
+        }
+    },
+    "selectMods": {
+        "message": "Select mods to install",
+        "choices": {
+            "admin-utils": "Provide a collection of useful utilities for private server admin",
+            "auth": "Add auth to private server",
+            "features": "Provides feature-management to private server",
+            "map-tool": "Provide map-management to private server",
+            "mongo": "Use MongoDB and Redis to replace default built-in LokiJS storage",
+            "pure-automation": "Disable all UI actions. Players should automating everything",
+            "remote-console": "Allow players to access their consoles on private server by ssh"
+        }
+    },
+    "inputShardName": "Input shard name",
+    "inputTickRate": "Input tick rate in milliseconds. (Any positive number is valid, but it is recommended to be above 1000, otherwise your players may complain ticking too quickly)",
+    "inputMaptoolUser": "Input user name for maptool mod",
+    "inputMaptoolPass": "Input password for maptool mod",
+    "inputNetwork": "Input network for docker",
+    "inputMongoVolume": "Input volume name for mongo data",
+    "inputRedisVolume": "Input volume name for redis data",
+    "selectRestartPolicy": {
+        "message": "Select service restart policy",
+        "choices": {
+            "always": "always restart container",
+            "no": "not restart",
+            "on-failure": "restart when container exits abnormally",
+            "unless-stopped": "restart when container exits until manually stopped (Recommended)"
+        }
+    },
+    "selectMongoVersion": {
+        "message": "Select mongo version",
+        "choices": {
+            "2.6.4": "Officially verified"
+        }
+    },
+    "selectRedisVersion": {
+        "message": "Select redis version",
+        "choices": {
+            "3.0.6": "Officially verified"
+        }
+    }
+}
