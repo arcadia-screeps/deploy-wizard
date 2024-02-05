@@ -1,0 +1,11 @@
+{
+  "editorconfig": true,
+  "semi": true,
+  "singleQuote": false,
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "htmlWhitespaceSensitivity": "strict",
+  "singleAttributePerLine": true
+}

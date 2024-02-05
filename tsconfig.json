@@ -1,0 +1,86 @@
+{
+  "compilerOptions": {
+    // Type Checking
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    // Modules
+    "baseUrl": "./",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "rootDir": "./src",
+    // Emit
+    "declaration": false,
+    //    "declarationDir": "./dist",
+    //    "declarationMap": true,
+    //        "emitDeclarationOnly": false,
+    "newLine": "lf",
+    "noEmit": false,
+    "noEmitOnError": false,
+    "outDir": "./dist",
+    //    "outFile": "",
+    //    "removeComments": false,
+    "sourceMap": true,
+    // JavaScript Support
+    "allowJs": false,
+    "checkJs": false,
+    // Editor Support
+    //    "disableSizeLimit": false,
+    //    "plugins": [],
+
+    // Interop Constrains
+    // 不需要写 import * as xxx from ""
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    //    "preserveSymlinks": false,
+    "verbatimModuleSyntax": true,
+    // Language and Environment
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    //    "jsx": "react-jsx",
+    //    "jsxFactory": "React.createElement",
+    //    "jsxFragmentFactory": "React.Fragment",
+    //    "jsxImportSource": "react",
+    //    "reactNamespace": "React",
+    "lib": [
+      "esnext"
+    ],
+    //    "noLib": false,
+    "moduleDetection": "auto",
+    "target": "esnext",
+    // Projects
+    "composite": false,
+    //    "incremental": false,
+    //    "tsBuildInfoFile": ".tsbuildinfo",
+    // Completeness
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "watchOptions": {
+    // Watch Options
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "excludeDirectories": [
+      "node_modules",
+      "dist"
+    ]
+  }
+}
