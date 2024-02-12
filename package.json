@@ -23,7 +23,9 @@
     "type": "module",
     "files": [
         "bin/",
-        "dist/"
+        "dist/",
+        "locales/",
+        "template/"
     ],
     "bin": {
         "screeps-deploy-wizard": "bin/screeps-deploy-wizard.js",
