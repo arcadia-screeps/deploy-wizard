@@ -90,33 +90,6 @@ sdw --help
 
 
 
-### 配置 Steam API key
-
-screeps 需要使用你的 Steam API key，screeps-launcher 提供两种方法进行配置。
-
-1. `config.yaml` 文件中配置
-
-   ```yaml
-   # config.yaml
-   steamKey: # 你的 Steam API key
-   steamKeyFile: "STEAM_KEY" # 存放 Steam API key 的文件路径
-   ```
-
-2. 使用独立文件存放，并在 `config.yaml` 中指定文件
-
-   ```yaml
-   # config.yaml
-   steamKeyFile: "STEAM_KEY" # 缺省值。指定存放 Steam API key 的文件路径。
-   ```
-
-   然后创建 `STEAM_KEY` 文件
-
-   ```sh
-   echo "替换为你的 Steam API key" > STEAM_KEY
-   ```
-
-   
-
 ### 初级预设
 
 初始化生成 `config.yaml`，用于 screeps-launcher 启动。
@@ -177,14 +150,15 @@ sdw logs
 验证 screeps 服务器可正常响应。在宿主机上运行命令行：
 
 ```sh
-curl http://localhost:21025
-
-# 可能会提示重定向到如下地址
-
-curl http://localhost:21025/web
+curl http://localhost:21025/web/
 ```
 
-如果返回一份 HTML 文件，包含配置的 Welcom Text，说明 screeps 服务器可正常提供服务。
+如果返回一份 HTML 文件，包含配置的 Welcome Text，说明 screeps 服务器可正常提供服务。
+
+:bulb: 注意，使用不同方式启动服务器时，该验证方法的网址不同
+
+* 直接使用官方 `screeps` 包，访问 `http://localhost:21025`
+* 使用`screeps-launcher` 启动，访问 `http://localhost:21025/web/`。注意，`web/` 的斜杠一定要带上。
 
 
 
@@ -198,11 +172,17 @@ sdw	cli
 docker exec -ti screeps-server screeps-launcher cli
 ```
 
-:warning: 必须加上 `-ti` 选项，否则会显示报错信息 `panic: no such device or address`
+:warning: 注意：必须加上 `-ti` 选项，否则会显示报错信息 `panic: no such device or address`
 
 
 
-然后在 CLI 中运行 `system.resetAllData()`，并使用 `Ctrl-d` 退出 CLI。最后重启容器：
+然后在 CLI 中运行如下命令：
+
+```sh
+system.resetAllData()
+```
+
+ 并使用 `Ctrl-d` 退出 CLI。为了保险，最好重启容器：
 
 ```sh
 sdw restart
@@ -215,6 +195,46 @@ sdw restart
 ```sh
 sdw stop
 ```
+
+:warning:注意：如果执行该命令后，所有容器将会被移除。若重新执行 `sdw start` 启动服务，则容器会重新进行初始化
+
+
+
+### 配置 Steam API key
+
+screeps 需要使用你的 Steam API key，screeps-launcher 提供两种方法进行配置。
+
+1. `config.yaml` 文件中配置
+
+   ```yaml
+   # config.yaml
+   steamKey: # 你的 Steam API key
+   ```
+
+2. 使用独立文件存放，并在 `config.yaml` 中指定文件
+
+   ```yaml
+   # config.yaml
+   steamKeyFile: "STEAM_KEY" # 缺省值。指定存放 Steam API key 的文件路径。
+   ```
+
+   然后创建 `STEAM_KEY` 文件
+
+   ```sh
+   echo "替换为你的 Steam API key" > STEAM_KEY
+   ```
+
+   此时你的目录结构应如下：
+
+   ```sh
+   .
+   ├── config.yml
+   ├── docker-compose.yml (高级预设)
+   └── STEAM_KEY
+   ```
+
+
+:warning: 如果配置了 STEAM_KEY 文件，但是没有放置，则 screeps-launcher 容器会不断重启。
 
 
 
