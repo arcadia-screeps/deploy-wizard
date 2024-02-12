@@ -3,11 +3,14 @@
 - [简介](#简介)
 - [平台兼容性](#平台兼容性)
 - [环境要求](#环境要求)
+- [安装](#安装)
 - [用法](#用法)
+  - [配置 Steam API key](#配置-Steam-API-key)
   - [初级预设](#初级预设)
   - [高级预设](#高级预设)
 - [配置](#配置)
   - [语言](#语言)
+- [构建](#构建)
 - [比较](#比较)
   - [screeps](#screeps)
   - [screeps-launcher](#screeps-launcher)
@@ -51,6 +54,26 @@
 
 
 
+## 安装
+
+从本项目 Github 仓库的 [发布](https://github.com/arcadia-screeps/deploy-wizard/releases/) 页面下载最新版发行包。
+
+
+
+****
+
+拉取 NPM 包。
+
+```sh
+npm i -g @arcadia-screeps/deploy-wizard
+
+# 或者
+
+yarn global add @arcadia-screeps/deploy-wizard
+```
+
+
+
 ## 用法
 
 查看帮助信息
@@ -66,6 +89,33 @@ sdw --help
 ```
 
 
+
+### 配置 Steam API key
+
+screeps 需要使用你的 Steam API key，screeps-launcher 提供两种方法进行配置。
+
+1. `config.yaml` 文件中配置
+
+   ```yaml
+   # config.yaml
+   steamKey: # 你的 Steam API key
+   steamKeyFile: "STEAM_KEY" # 存放 Steam API key 的文件路径
+   ```
+
+2. 使用独立文件存放，并在 `config.yaml` 中指定文件
+
+   ```yaml
+   # config.yaml
+   steamKeyFile: "STEAM_KEY" # 缺省值。指定存放 Steam API key 的文件路径。
+   ```
+
+   然后创建 `STEAM_KEY` 文件
+
+   ```sh
+   echo "替换为你的 Steam API key" > STEAM_KEY
+   ```
+
+   
 
 ### 初级预设
 
@@ -195,6 +245,28 @@ sdw config set language en
 
 # 中文
 sdw config set language zh
+```
+
+
+
+## 构建
+
+将项目拉取到本地后，你需要先构建才能使用。先进入项目根目录 `cd deploy-wizard`，然后执行如下命令：
+
+```sh
+npm build
+
+# or
+
+yarn build
+```
+
+
+
+如果你希望在任意目录下都能使用，则需要将命令添加到全局
+
+```sh
+npm link
 ```
 
 
