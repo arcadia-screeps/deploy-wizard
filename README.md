@@ -5,12 +5,13 @@
 - [环境要求](#环境要求)
 - [安装](#安装)
 - [用法](#用法)
-  - [配置 Steam API key](#配置-Steam-API-key)
   - [初级预设](#初级预设)
   - [高级预设](#高级预设)
-- [配置](#配置)
+  - [配置 Steam API key](#配置-Steam-API-key)
+- [脚手架配置](#脚手架配置)
   - [语言](#语言)
 - [构建](#构建)
+- [FAQs](#FAQs)
 - [比较](#比较)
   - [screeps](#screeps)
   - [screeps-launcher](#screeps-launcher)
@@ -196,8 +197,6 @@ sdw restart
 sdw stop
 ```
 
-:warning:注意：如果执行该命令后，所有容器将会被移除。若重新执行 `sdw start` 启动服务，则容器会重新进行初始化
-
 
 
 ### 配置 Steam API key
@@ -238,7 +237,7 @@ screeps 需要使用你的 Steam API key，screeps-launcher 提供两种方法�
 
 
 
-## 配置
+## 脚手架配置
 
 可以通过如下两种方法对脚手架进行配置：
 
@@ -288,6 +287,131 @@ yarn build
 ```sh
 npm link
 ```
+
+
+
+## FAQs
+
+### 为什么服务器首次启动时需要等待很久才能正常响应
+
+因为 screeps-launcher 容器启动时，会根据配置拉取 screeps、mod 以及其他 node 依赖包，因此需要花费较长时间。
+
+
+
+### 为什么服务器重启或停止后启动时无需等待
+
+因为使用 docker 启动服务时配置了存储卷，所有服务器运行时的依赖与配置文件都放置在存储卷中，因此 screeps-launcher 无需重新拉取依赖，可以直接启动。
+
+
+
+### 如何查看服务器 Dashboard
+
+开启 screepsmod-admin-util 后，它为服务器提供了一个 Web 端的 Dashboard，只需再浏览器中访问 `http://{{Your server ip}}:21025`。
+
+该网页包括一个仪表盘 Dashboard：
+
+* Tick Rate 变动率
+* 服务器当前 Tick 
+* 活跃用户
+* Creeps 总数
+* 玩家占据的房间
+* 玩家活动的房间
+
+以及一个排行榜 LeaderBoard，可以分别查看如下资源的玩家排名
+
+* GCL
+* Power
+* Rooms
+* RCL
+
+
+
+### 运行时如何修改服务器的配置
+
+`config.yml` 配置文件中的 `serverConfig` 内的大部分配置被修改后，会即时重载到服务器中。
+
+:bulb: 具体配置项请查看 [screeps-launcher](#screeps-launcher) 一章以及每个 Mod 的详细说明。
+
+修改 `config.yml` 无需进入到容器中进行。查看生成的 `docker-compose.yml`，`config.yml` 以 bind mounts 的形式挂载到容器中，因此你只需要直接修改宿主机上的 `config.yml` 文件，这些修改就会被同步到容器中。
+
+例如：将 `serverConfig.tickRate` 从 1000 修改到 2000，查看 Web Dashboard，可以看到服务器的 Tick Rate 已经升高。
+
+
+
+
+
+### 如何查看容器的卷以及挂载点
+
+**查看卷**
+
+若你没有修改配置，卷名缺省如下：
+
+* `screeps_server-data`：screeps-launcher 容器的存储卷，默认挂载到容器内的 `/screeps` 目录
+* `screeps_mongo-data`：mongo 容器的存储卷
+* `screeps_redis-data`：redis 容器的存储卷
+
+
+
+执行如下命令查看所有卷：
+
+```sh
+docker volume ls | grep "screeps"
+```
+
+
+
+****
+
+**查看挂载点**
+
+以 `screeps_server-data` 卷为例，查看其他卷的做法类似。检视该卷的详细信息：
+
+```sh
+docker volume inspect screeps_server-data
+```
+
+
+
+返回结果如下：
+
+```json
+{
+    	//...
+        "Mountpoint": "/var/lib/docker/volumes/screeps_server-data/_data",
+	    //...
+}
+```
+
+
+
+你可以进入挂载点随意查看：
+
+```sh
+cd /var/lib/docker/volumes/screeps_server-data/_data
+```
+
+
+
+或者直接执行下述命令：
+
+```sh
+cd $(docker volume inspect screeps_server-data | jq '.[0].Mountpoint' | sed 's|\"||g')
+```
+
+
+
+### 使用 Steam 客户端启动 Screeps worlds 时卡在标题界面
+
+原因：Screeps 在下载更新自己的 `package.nw` 文件
+
+解决方法：手动下载最新版文件并替换
+
+* 在 Steam 库中右击游戏——管理——浏览本地文件，在文件管理器中打开 Screeps worlds。可以找到有一个 `package.nw` 文件，以及一个正在下载最新版本的 `package.nw.new` 文件。
+* 进入[官网](https://screeps.com/api/version)查看最新版本，检查 `package` 字段，目前最新版本为 `224`。
+* 将版本号拼接成下载链接：`https://screeps.com/packages/224`，点击链接下载文件，文件名缺省是版本号。
+* 重命名文件为 `package.nw` 并替换到游戏目录中即可。
+
+参考博客：[screeps world卡在nw.js界面](https://blog.csdn.net/weixin_44083915/article/details/134097416)
 
 
 
