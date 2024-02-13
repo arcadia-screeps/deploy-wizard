@@ -45,7 +45,13 @@
             "description": "创建 config.yml (以及 docker-compose.yml) 文件"
         },
         "outdated": {
-            "description": "查看 screeps-deploy-wizard 版本是否已过时"
+            "description": "查看 screeps-deploy-wizard 版本是否已过时",
+            "message": {
+                "haveNewVersion": "有可更新版本",
+                "updateNotice": "你可以执行如下命令进行更新",
+                "or": "或者",
+                "noUpdateNeeded": "当前版本已经是最新"
+            }
         },
         "restart": {
             "description": "重启 screeps 服务"

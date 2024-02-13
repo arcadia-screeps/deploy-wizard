@@ -51,6 +51,12 @@ export interface Resources {
             }
             outdated: {
                 description: string;
+                message: {
+                    haveNewVersion: string,
+                    updateNotice: string,
+                    or: string,
+                    noUpdateNeeded: string,
+                }
             }
             restart: {
                 description: string;

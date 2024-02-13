@@ -45,7 +45,13 @@
             "description": "create config.yml (and docker-compose.yml) file"
         },
         "outdated": {
-            "description": "check if screeps-deploy-wizard is outdated"
+            "description": "check if screeps-deploy-wizard is outdated",
+            "message": {
+                "haveNewVersion": "New version available",
+                "updateNotice": "You can update by executing",
+                "or": "or",
+                "noUpdateNeeded": "Current version is latest"
+            }
         },
         "restart": {
             "description": "restart screeps service"
