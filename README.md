@@ -1,5 +1,42 @@
 # screeps-deploy-wizard
 
+<img alt="NPM Version" src="https://img.shields.io/npm/v/%40arcadia-screeps%2Fdeploy-wizard?logo=npm"/><img alt="GitHub Release" src="https://img.shields.io/github/v/release/arcadia-screeps/deploy-wizard"/><img alt="NPM Downloads" src="https://img.shields.io/npm/dt/%40arcadia-screeps%2Fdeploy-wizard?label=total%20downloads">![GitHub last commit (branch)](https://img.shields.io/github/last-commit/arcadia-screeps/deploy-wizard/master)<img alt="GitHub License" src="https://img.shields.io/github/license/arcadia-screeps/deploy-wizard"/>
+
+<p align="center">        
+    <br />    
+    <br />
+    <img src="./images/logo.png" alt="Logo" style="zoom:15%;" />
+    <br />    
+    <br />
+A forked Javascript/Typescript library for the Chat Nio API on Node.
+    <br />
+    <br />
+    <a href="README.md">English</a>
+    ·
+    <a href="README_zh.md">简体中文</a>
+    <br />
+    <br />
+    <a href="#用法">Usage</a>
+    ·
+    <a href="https://github.com/arcadia-screeps/deploy-wizard/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/arcadia-screeps/deploy-wizard/issues">Propose Feature</a>
+    <br />
+    <br />
+    <a href="https://github.com/screeps/screeps">Screeps</a>
+    ·
+    <a href="https://github.com/screepers/screeps-launcher">Screeps Launcher</a>
+    <br />
+    <br />
+    <a href="https://stats.deeptrain.net/">
+        <img src="https://stats.deeptrain.net/repo/arcadia-screeps/deploy-wizard" alt="Stat"/>
+    </a>
+</p>
+
+
+
+## Table of Contents
+
 - [简介](#简介)
 - [平台兼容性](#平台兼容性)
 - [环境要求](#环境要求)
@@ -53,7 +90,7 @@
 * Node.js 16 LTS 或更高版本
 * Docker （如果应用高级预设）
 
-
+<p align="right">[<a href="#Table of contents">↑ back to top</a>]</p>
 
 ## 安装
 
@@ -73,7 +110,7 @@ npm i -g @arcadia-screeps/deploy-wizard
 yarn global add @arcadia-screeps/deploy-wizard
 ```
 
-
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
 ## 用法
 
@@ -235,7 +272,7 @@ screeps 需要使用你的 Steam API key，screeps-launcher 提供两种方法�
 
 :warning: 如果配置了 STEAM_KEY 文件，但是没有放置，则 screeps-launcher 容器会不断重启。
 
-
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
 ## 脚手架配置
 
@@ -266,7 +303,7 @@ sdw config set language en
 sdw config set language zh
 ```
 
-
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
 ## 构建
 
@@ -288,7 +325,7 @@ yarn build
 npm link
 ```
 
-
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
 ## FAQs
 
@@ -412,6 +449,8 @@ cd $(docker volume inspect screeps_server-data | jq '.[0].Mountpoint' | sed 's|\
 * 重命名文件为 `package.nw` 并替换到游戏目录中即可。
 
 参考博客：[screeps world卡在nw.js界面](https://blog.csdn.net/weixin_44083915/article/details/134097416)
+
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
 
 
@@ -769,3 +808,6 @@ serverConfig:
 对使用 Primary 预设的玩家，可以直接使用本脚手架生成的 `config.yaml`，参考 [screeps-launcher/Usage](https://github.com/screepers/screeps-launcher?tab=readme-ov-file#usage) 中的说明，使用 `screeps-launcher` 命令启动服务器。（需要先从 screeps-launcher 的 [Releases](https://github.com/screepers/screeps-launcher/releases) 页面下载一份发行版）
 
 对使用 Advanced 预设的玩家，会同时运行 screeps-server，mongo 与 redis 三个容器，并使用 docker compose 进行统一管理。玩家可以使用 `sdw` 提供的命令，简化对服务的管理，或者使用 docker 命令进行更精细的操作。
+
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
+

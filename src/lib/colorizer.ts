@@ -11,7 +11,7 @@ function _colorStringify(value: object, space: number, step: number): string {
     const spaces = " ".repeat(space) ;
     return Object.entries(value).reduce((prev, [key, value], index, array) => {
         prev += `${spaces}${chalk.green(`"${key}"`)}: ${
-            typeof value === "object"
+            typeof value === "object" && value !== null && value !== undefined
                 ? `{\n${_colorStringify(value, space + step, step)}${spaces}}`
                 : colorStringifyPrimitive(value)
         }${
@@ -24,7 +24,7 @@ function _colorStringify(value: object, space: number, step: number): string {
 }
 
 export function colorStringify(value: any, space: number): string {
-    if (typeof value === "object") {
+    if (typeof value === "object" && value !== null && value !== undefined) {
         return `{\n${_colorStringify(value, space, space)}}` ;
     } else {
         return colorStringifyPrimitive(value) ;
