@@ -8,7 +8,7 @@
     <img src="./images/logo.png" alt="Logo" style="zoom:15%;" />
     <br />    
     <br />
-A forked Javascript/Typescript library for the Chat Nio API on Node.
+A CLI for screeps server based on screep-launcher
     <br />
     <br />
     <a href="README.md">English</a>
@@ -35,124 +35,127 @@ A forked Javascript/Typescript library for the Chat Nio API on Node.
 
 
 
+
 ## Table of Contents
 
-- [简介](#简介)
-- [平台兼容性](#平台兼容性)
-- [环境要求](#环境要求)
-- [安装](#安装)
-- [用法](#用法)
-  - [初级预设](#初级预设)
-  - [高级预设](#高级预设)
-  - [配置 Steam API key](#配置-Steam-API-key)
-- [脚手架配置](#脚手架配置)
-  - [语言](#语言)
-- [构建](#构建)
+- [Description](#Description)
+- [Compatibility](#Compatibility)
+- [Environment](#Environment)
+- [Installation](#Installation)
+- [Usage](#Usage)
+  - [Primary Preset](#Primary-Preset)
+  - [Advanced Preset](#Advanced-Preset)
+  - [Config Steam API Key](#Config-Steam-API-Key)
+- [CLI Configuration](#CLI-Configuration)
+  - [Language](#Language)
+- [Build](#Build)
 - [FAQs](#FAQs)
-- [比较](#比较)
+- [Compare](#Compare)
   - [screeps](#screeps)
   - [screeps-launcher](#screeps-launcher)
-  - [screeps-deploy-wizard(本项目)](#本项目)
+  - [screeps-deploy-wizard(This Project)](#This-Project)
 
 
 
-## 简介
+## Description
 
-基于 screeps-launcher 的 Screeps 服务器命令行工具。用于生成 screeps-launcher 所需的 config.yaml，以及一些其他的便利功能。
+A CLI for screeps server based on screep-launcher. Used for generating the `config.yaml` required by screeps-launcher, as well as providing some other utility features.
 
-本脚手架提供 2 种预设启动方式：
+This CLI provides two preset startup modes:
 
-1. 裸机启动。禁用了 screepsmod-mongo。
-2. docker 启动。强制启用了 screepsmod-mongo。
+1. Bare-metal startup. Disables screepsmod-mongo.
+2. Docker startup. Enforces the use of screepsmod-mongo.
 
-| 启动方式 | 不安装 mongo mod                               | 安装 mongo mod                                   |
-| -------- | ---------------------------------------------- | ------------------------------------------------ |
-| 裸机启动 | 直接使用 screeps-launcher 启动（primary 预设） | 需要裸机安装 mongo 与 redis 并手动管理（不推荐） |
-| docker   | 使用基于 LokiJS 库的存储                       | 自动化管理服务（advacned 预设）                  |
+| Startup Mode | 不安装 mongo mod                                         | 安装 mongo mod                                               |
+| ------------ | -------------------------------------------------------- | ------------------------------------------------------------ |
+| Bare-metal   | Startup directly using screeps-launcher (primary preset) | Requires manual installation of mongo and redis on bare metal and manual management (not recommended). |
+| Docker       | Using storage based on the LokiJS library                | Service automated management (advanced preset).              |
 
-:bulb: 基于 screeps-launcher，必须安装 `screepsmod-admin-util`，以允许解析 `config.yaml` 中的 `server-config` 段
-
-
-
-## 平台兼容性
-
-本脚手架程序适用于如下平台：
-
-* Windows
-* Linux
-
-:bulb: Mac 平台未经测试
-
-
-
-## 环境要求
-
-* Node.js 16 LTS 或更高版本
-* Docker （如果应用高级预设）
+:bulb:Based on screeps-launcher, `screepsmod-admin-util` must be installed to allow parsing of the `server-config` section in `config.yaml`. 
 
 <p align="right">[<a href="#Table of contents">↑ back to top</a>]</p>
 
-## 安装
+## Compatibility
 
-从本项目 Github 仓库的 [发布](https://github.com/arcadia-screeps/deploy-wizard/releases/) 页面下载最新版发行包。
+This CLI is compatible for the following platforms:
+
+- Windows
+- Linux
+
+:bulb: Mac platform has not been tested.
 
 
 
-****
+## Environment
 
-拉取 NPM 包。
+* Node.js 16 LTS or higher version
+* Docker (if using advanced presets)
+
+<p align="right">[<a href="#Table of contents">↑ back to top</a>]</p>
+
+## Installation
+
+### Source Code
+
+Download the latest release package from the [Releases](https://github.com/arcadia-screeps/deploy-wizard/releases/) page of this project's GitHub repository.
+
+To build from source code, refer to the [Build](https://chatnio.net/#Build) section.
+
+### NPM
+
+Pull from NPM:
 
 ```sh
 npm i -g @arcadia-screeps/deploy-wizard
 
-# 或者
+# or
 
 yarn global add @arcadia-screeps/deploy-wizard
 ```
 
 <p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
-## 用法
+## Usage
 
-查看帮助信息
+View the help information
 
 ```sh
 screeps-deploy-wizard
 screeps-deploy-wizard --help
 
-# 或者使用缩写
+# or use the abbreviation
 
 sdw
 sdw --help
 ```
 
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
+### Primary Preset
 
-### 初级预设
-
-初始化生成 `config.yaml`，用于 screeps-launcher 启动。
-
-```sh
-sdw init
-```
-
-跟随交互式命令行，并选择 `Primary` 预设。
-
-
-
-### 高级预设
-
-初始化生成 `config.yaml` 与 `docker-compose.yaml`，用于后续服务运行。
+Initialize and generate `config.yaml` for launching with screeps-launcher.
 
 ```sh
 sdw init
 ```
 
-跟随交互式命令行，并选择 `Advanced` 预设。
+Follow the interactive command line and select the `Primary` preset.
+
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
+
+### Advanced Preset
+
+Initialize and generate `config.yaml` and `docker-compose.yaml` for starting up docker service
+
+```sh
+sdw init
+```
+
+Follow the interactive command line and select the `Advanced` preset.
 
 
 
-使用 docker 启动服务，服务定义在 `docker-compose.yaml` 中
+Use Docker to start the service defined in `docker-compose.yaml`.
 
 ```sh
 sdw start
@@ -160,15 +163,15 @@ sdw start
 
 
 
-screeps-server 容器使用 screeps-launcher 镜像，容器启动时会解析 `config.yaml` ，安装运行环境以及指定的 mod，最后再启动 screeeps 服务器。此过程会花费较长时间，请查看容器日志确认进度。
+The `screeps-server` container uses the `screeps-launcher` image. When the container starts, it will parse the `config.yaml`, install the runtime environment and specified mods, and finally start the Screeps server. This process may take a while. Please check the container logs to confirm the progress.
 
-输出 screeps-server 容器日志
+Output logs of  screeps-server container
 
 ```sh
 sdw logs
 ```
 
-等待日志不再滚动输出，并输出类似于如下信息，则表示 screeps 服务器启动成功，玩家可使用 steam 客户端连接到它。
+Wait for the logs to stop scrolling and output similar information as shown below. This indicates that the Screeps server has started successfully, and players can connect to it using the Steam client.
 
 ```sh
 2024/01/31 14:38:05 Initializing server
@@ -185,42 +188,37 @@ sdw logs
 
 
 
-验证 screeps 服务器可正常响应。在宿主机上运行命令行：
+Access the address `http://localhost:21025/web/` in your browser. Run a command on host to verify if the Screeps server is responding correctly:
 
 ```sh
 curl http://localhost:21025/web/
 ```
 
-如果返回一份 HTML 文件，包含配置的 Welcome Text，说明 screeps 服务器可正常提供服务。
-
-:bulb: 注意，使用不同方式启动服务器时，该验证方法的网址不同
-
-* 直接使用官方 `screeps` 包，访问 `http://localhost:21025`
-* 使用`screeps-launcher` 启动，访问 `http://localhost:21025/web/`。注意，`web/` 的斜杠一定要带上。
+:bulb: Please note that when accessing it from the command line, you must include the `/web/` slash. (This website is provided by `screepsmod-admin-utils-ui`).
 
 
 
-需要初始化数据库，清除所有用户数据时。首先连接到 screeps-launcher 的 CLI：
+****
+
+To initialize the database or clear all user data, first connect to the CLI of `screeps-launcher`:
 
 ```sh
 sdw	cli
 
-# 或者在 screeps-server 容器中执行指令 screeps-launcher cli
+# Equivalent to executing the command `screeps-launcher cli` inside the screeps-server container.
 
 docker exec -ti screeps-server screeps-launcher cli
 ```
 
-:warning: 注意：必须加上 `-ti` 选项，否则会显示报错信息 `panic: no such device or address`
+:warning:Note: It is necessary to include the `-ti` option, otherwise it may display error messages: `panic: no such device or address`
 
-
-
-然后在 CLI 中运行如下命令：
+Then run command in CLI:
 
 ```sh
 system.resetAllData()
 ```
 
- 并使用 `Ctrl-d` 退出 CLI。为了保险，最好重启容器：
+finally exit CLI using `Ctrl-d`. It is best to restart the container.：
 
 ```sh
 sdw restart
@@ -228,39 +226,41 @@ sdw restart
 
 
 
-若要终止服务，执行如下命令退出并移除所有服务相关的容器。
+****
+
+If you want to terminate the service, execute the following command to exit and remove all containers related to the service.
 
 ```sh
 sdw stop
 ```
 
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
+### Config Steam API Key
 
-### 配置 Steam API key
+Starting Screeps server requires your Steam API Key. Screeps-launcher provides two methods for configuration.
 
-screeps 需要使用你的 Steam API key，screeps-launcher 提供两种方法进行配置。
-
-1. `config.yaml` 文件中配置
-
-   ```yaml
-   # config.yaml
-   steamKey: # 你的 Steam API key
-   ```
-
-2. 使用独立文件存放，并在 `config.yaml` 中指定文件
+1. config in `config.yaml` file
 
    ```yaml
    # config.yaml
-   steamKeyFile: "STEAM_KEY" # 缺省值。指定存放 Steam API key 的文件路径。
+   steamKey: # your Steam API Key
    ```
 
-   然后创建 `STEAM_KEY` 文件
+2. Store Steam API Key in a separate file and specify the file path in `config.yaml`.
+
+   ```yaml
+   # config.yaml
+   steamKeyFile: "STEAM_KEY" # Default
+   ```
+
+   and then create `STEAM_KEY` file
 
    ```sh
-   echo "替换为你的 Steam API key" > STEAM_KEY
+   echo "replace your Steam API Key here" > STEAM_KEY
    ```
 
-   此时你的目录结构应如下：
+   your directory structure should look like this:
 
    ```sh
    .
@@ -270,44 +270,44 @@ screeps 需要使用你的 Steam API key，screeps-launcher 提供两种方法�
    ```
 
 
-:warning: 如果配置了 STEAM_KEY 文件，但是没有放置，则 screeps-launcher 容器会不断重启。
+:warning: If the STEAM_KEY file is configured but not placed, the screeps-launcher container will keep restarting.
 
 <p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
-## 脚手架配置
+## CLI Configuration
 
-可以通过如下两种方法对脚手架进行配置：
+You can configure this CLI in two ways:
 
-1. 使用命令 `sdw config` 管理所有配置项
-2. 直接修改配置文件
+1. Use `sdw config` command to manage all configuration options.
+2. Modify the configuration file directly.
 
 
 
-配置文件路径如下：
+Path for configuration file：
 
-*  Linux 与 Mac：`$HOME/.screep-deploy-wizard/config.json`
+*  Linux and Mac：`$HOME/.screep-deploy-wizard/config.json`
 
 *  Windows：`$HOME\.screep-deploy-wizard\config.json`
 
 
 
-### 语言
+### Language
 
-本脚手架支持中英双语，使用 `language` 配置项进行语言切换。
+This CLI supports both English and Chinese languages. You can use the `language` configuration option to switch between languages.
 
 ```sh
-# 英文
+# English
 sdw config set language en
 
-# 中文
+# Chinese
 sdw config set language zh
 ```
 
 <p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
-## 构建
+## Build
 
-将项目拉取到本地后，你需要先构建才能使用。先进入项目根目录 `cd deploy-wizard`，然后执行如下命令：
+After pulling the project to local, you need to build it before you can use it. First, cd into project root using `cd deploy-wizard`, and then execute the following command:
 
 ```sh
 npm build
@@ -319,7 +319,7 @@ yarn build
 
 
 
-如果你希望在任意目录下都能使用，则需要将命令添加到全局
+If you want to use the command in any directory, you need to add it globally
 
 ```sh
 npm link
@@ -329,67 +329,65 @@ npm link
 
 ## FAQs
 
-### 为什么服务器首次启动时需要等待很久才能正常响应
+### Why does the server take a long time to respond when it is first started?
 
-因为 screeps-launcher 容器启动时，会根据配置拉取 screeps、mod 以及其他 node 依赖包，因此需要花费较长时间。
-
-
-
-### 为什么服务器重启或停止后启动时无需等待
-
-因为使用 docker 启动服务时配置了存储卷，所有服务器运行时的依赖与配置文件都放置在存储卷中，因此 screeps-launcher 无需重新拉取依赖，可以直接启动。
+Because the `screeps-launcher` container will pull the `screeps`, `mod`, and other Node.js dependencies based on the configuration. This process can take some time to complete.
 
 
 
-### 如何查看服务器 Dashboard
+### Why there is no need to wait when the server restarts or stops and then starts again.
 
-开启 screepsmod-admin-util 后，它为服务器提供了一个 Web 端的 Dashboard，只需再浏览器中访问 `http://{{Your server ip}}:21025`。
+Because the server container is configured with a volume. This volume stores the runtime dependencies and configuration files, so the `screeps-launcher` does not need to pull dependencies again and can start directly.
 
-该网页包括一个仪表盘 Dashboard：
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
-* Tick Rate 变动率
-* 服务器当前 Tick 
-* 活跃用户
-* Creeps 总数
-* 玩家占据的房间
-* 玩家活动的房间
+### How to access Dashboard
 
-以及一个排行榜 LeaderBoard，可以分别查看如下资源的玩家排名
+After enabling `screepsmod-admin-util`, it provides a web-based dashboard for the server, which can be accessed in a browser by visiting `http://{{Your server ip}}:21025`.
+
+The webpage includes a dashboard with the following information:
+
+- Tick Rate variation
+- Current Tick of the server
+- Active users
+- Total number of Creeps
+- Rooms occupied by players
+- Rooms active with player activity
+
+And a LeaderBoard to view the player rankings for the following resources separately:
 
 * GCL
 * Power
 * Rooms
 * RCL
 
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
+### How to modify the server configuration during runtime
 
-### 运行时如何修改服务器的配置
+When most of the configurations within the `serverConfig` section of the `config.yml` file are modified, they are instantly reloaded into the server.
 
-`config.yml` 配置文件中的 `serverConfig` 内的大部分配置被修改后，会即时重载到服务器中。
+:bulb: For specific configuration options, please refer to the [screeps-launcher](https://chatnio.net/#screeps-launcher) chapter and the detailed documentation of each mod.
 
-:bulb: 具体配置项请查看 [screeps-launcher](#screeps-launcher) 一章以及每个 Mod 的详细说明。
+You can modify the `config.yml` file without entering the container. By inspecting the generated `docker-compose.yml`, you can see that the `config.yml` file is mounted into the container as a bind mount. Therefore, you can directly modify the `config.yml` file on the host machine, and these changes will be synchronized to the container.
 
-修改 `config.yml` 无需进入到容器中进行。查看生成的 `docker-compose.yml`，`config.yml` 以 bind mounts 的形式挂载到容器中，因此你只需要直接修改宿主机上的 `config.yml` 文件，这些修改就会被同步到容器中。
+For example, if you change `serverConfig.tickRate` from 1000 to 2000 and then check the Web Dashboard, you will see that the server's Tick Rate has increased.
 
-例如：将 `serverConfig.tickRate` 从 1000 修改到 2000，查看 Web Dashboard，可以看到服务器的 Tick Rate 已经升高。
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
+### How to list volumes and inspect mount point
 
+**List volumes**
 
+If not modified, the default volume names are:
 
-
-### 如何查看容器的卷以及挂载点
-
-**查看卷**
-
-若你没有修改配置，卷名缺省如下：
-
-* `screeps_server-data`：screeps-launcher 容器的存储卷，默认挂载到容器内的 `/screeps` 目录
-* `screeps_mongo-data`：mongo 容器的存储卷
-* `screeps_redis-data`：redis 容器的存储卷
+* `screeps_server-data`：volume for screeps-launcher container，default mounting to `/screeps` dir
+* `screeps_mongo-data`：volume for mongo
+* `screeps_redis-data`：volume for redis
 
 
 
-执行如下命令查看所有卷：
+Execute command to list all volumes:
 
 ```sh
 docker volume ls | grep "screeps"
@@ -399,17 +397,15 @@ docker volume ls | grep "screeps"
 
 ****
 
-**查看挂载点**
+**Inspect mount point**
 
-以 `screeps_server-data` 卷为例，查看其他卷的做法类似。检视该卷的详细信息：
+Take `screeps_server-data` volume as example, inspect the detailed information of volume:
 
 ```sh
 docker volume inspect screeps_server-data
 ```
 
-
-
-返回结果如下：
+The output result look like this:
 
 ```json
 {
@@ -421,7 +417,7 @@ docker volume inspect screeps_server-data
 
 
 
-你可以进入挂载点随意查看：
+cd into mount point and look around:
 
 ```sh
 cd /var/lib/docker/volumes/screeps_server-data/_data
@@ -429,84 +425,83 @@ cd /var/lib/docker/volumes/screeps_server-data/_data
 
 
 
-或者直接执行下述命令：
+or execute the following quick command:
 
 ```sh
 cd $(docker volume inspect screeps_server-data | jq '.[0].Mountpoint' | sed 's|\"||g')
 ```
 
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
+### Why get stuck on title screen when starting up Stream client
 
-### 使用 Steam 客户端启动 Screeps worlds 时卡在标题界面
+Reason：Screeps is updating its `package.nw` file.
 
-原因：Screeps 在下载更新自己的 `package.nw` 文件
+Solution: Manually download the latest version of the file and replace it.
 
-解决方法：手动下载最新版文件并替换
+- Right-click on the game in the Steam library - Manage - Browse Local Files, open Screeps worlds in the file manager. You will find a `package.nw` file and a `package.nw.new` file that is currently downloading the latest version.
+- Visit the [official website](https://screeps.com/api/version) to check the latest version, and examine the `package` field. The current latest version is `224`.
+- Concatenate the version number into the download link: `https://screeps.com/packages/224`, access the link to download the file, and the file name will default to the version number.
+- Rename the file to `package.nw` and replace it in the game directory.
 
-* 在 Steam 库中右击游戏——管理——浏览本地文件，在文件管理器中打开 Screeps worlds。可以找到有一个 `package.nw` 文件，以及一个正在下载最新版本的 `package.nw.new` 文件。
-* 进入[官网](https://screeps.com/api/version)查看最新版本，检查 `package` 字段，目前最新版本为 `224`。
-* 将版本号拼接成下载链接：`https://screeps.com/packages/224`，点击链接下载文件，文件名缺省是版本号。
-* 重命名文件为 `package.nw` 并替换到游戏目录中即可。
-
-参考博客：[screeps world卡在nw.js界面](https://blog.csdn.net/weixin_44083915/article/details/134097416)
+Reference post：[screeps world卡在nw.js界面](https://blog.csdn.net/weixin_44083915/article/details/134097416)
 
 <p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
 
 
-## 比较
+## Compare
 
 ### screeps
 
-[screeps](https://github.com/screeps/screeps) 是官方项目，官方描述如下
+Description of official project [screeps](https://github.com/screeps/screeps)
 
 >This project is a distributed, standalone game server that allows you to launch your own game world on a local computer or dedicated server on the Internet.
 >
->该项目是一个分布式、独立的游戏服务器，允许您在本地计算机或互联网上的专用服务器上启动自己的游戏世界。
 
-screeps 提供官方 npm 包。但是项目长时间不更新，最新版 [Release v3.4.0](https://github.com/screeps/screeps/releases/tag/v3.4.0) 发布在 2019 年。并且安装与运行所需环境十分老旧，安装时需要 nodegyp 搭配 python2 进行构建。经过实践证明，最好在 Ubuntu 上使用 node:10 环境安装 screeps 包。
+Screeps provides an official npm package. However, the project has not been updated for a long time, and the latest version [Release v3.4.0](https://github.com/screeps/screeps/releases/tag/v3.4.0) was released in 2019. The required environment for installation and runtime are very outdated, including nodegyp and python2. The best practise is install the screeps package on the node:10 environment on Ubuntu.
 
 ```sh
-# 根据提示，输入 Steam API key
+# Input Steam API Key
 npx screeps init
 
-# 启动服务器
+# Start server
 npx screeps start
 
-# 连接到服务器的命令行交互界面，必须先启动服务器
+# Connect to CLI of screeps server. Must start the server first
 npx screeps cli
->> help() # 输入 help() 查看可用的命令
+>> help() # use help() to check available commands
 ```
 
 
 
-为了不破坏服务器环境，最好打包成镜像并运行。下面提供一份非官方的 dockerfile：
+For the sake of not disrupting the server environment, it is best to package it into an image and run it. Below is an unofficial Dockerfile.
 
 ```dockerfile
 ARG STEAM_API_KEY
 
-# 分阶段构建镜像
-# BUILDER 阶段使用 ubuntu 镜像安装所需的 node 包
+# Staged build image
+# BUILDER stage use ubuntu image to install node package
 FROM ubuntu:16.04 AS BUILDER
 
-# apt 换源，下载基础依赖
+# Change source if neccessary, and download environment
 RUN sed -i 's@//.*archive.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.list  && \
     apt update && \
     apt install -y build-essential tcl git curl gcc g++ make
 
-# 安装 node:10.x
+# Install node:10.x
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt install -y nodejs
 
-# 安装 yarn
+# Install yarn
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null && \
     echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install -y yarn
 
-# 创建并切换工作目录
+# Create and switch working dir
 WORKDIR /screeps
 
-# yarn 换源并下载 mod 与 screeps 服务器包
+# yarn change source and download mod and screeps server package
 RUN yarn config set registry https://registry.npmmirror.com && \
     yarn add \
         screepsmod-admin-utils  \
@@ -517,35 +512,35 @@ RUN yarn config set registry https://registry.npmmirror.com && \
 
 FROM node:10.24-slim AS base-server
 ARG STEAM_API_KEY
-# 使用 screeps 用户而非 root 用户运行
+# Running with screeps user instead of root
 RUN groupadd --gid 1000 screeps \
   && useradd --uid 1000 --gid screeps --shell /bin/bash --create-home screeps \
   && mkdir /screeps && chown screeps.screeps /screeps
 USER screeps
-# 暴露 /screeps 卷
+# Expose /screeps volume
 VOLUME /screeps
 WORKDIR /screeps
 
-# 从 BUILDER 阶段复制 node_modules, package.json, yarn.lock
+# Copy node_modules, package.json, yarn.lock from BUILDER stage
 COPY --from=BUILDER /screeps/ ./
-# 覆盖默认配置文件
+# Override default screep configuration
 COPY ./mods.json ./.screepsrc ./
-# 使用参数 STEAM_API_KEY 初始化
+# Initial with STEAM_API_KEY parameter
 RUN sh -c '/bin/echo "${STEAM_API_KEY}" | npx screeps init'
 ENTRYPOINT ["npx", "screeps", "start"]
 ```
 
 
 
-:bulb: 使用说明：
+:bulb: Instructions:
 
-1. 新建文件夹 `screeps-server` ，存放 `dockerfile` 以及其他文件
+1. Create a new folder named `screeps-server` to store the `Dockerfile` and other files.
 
-2. 创建文件 `mods.json`，内容如下：
+2. Create a file named `mods.json` with the following content:
 
    ```json
    {
-       // 启用的 mod 列表。必须是安装的所有 mod 的子集
+       // List of enabled mods. It must be a subset of all installed mods
        "mods": [
            "node_modules/screepsmod-mongo/index.js",
            "node_modules/screepsmod-auth/index.js",
@@ -554,14 +549,14 @@ ENTRYPOINT ["npx", "screeps", "start"]
        	"node_modules/screepsmod-features/index.js"
        ],
        
-       // npc 机器人使用的脚本
+       // scripts for npc bot
        "bots": {
            "simplebot": "node_modules/@screeps/simplebot/src"
        }
    }
    ```
 
-3. 创建文件 `.screepsrc`，这是一个 ini 格式的配置文件。使用 ` screeps start [option]` 启动时，所有选项会自动保存到该文件中，因此也可以直接修改`.screepsrc` 文件来指定服务器启动的选项。 
+3. Create a  `.screepsrc` file in INI format. When using `screeps start [option]` command to start, all options will be automatically saved to this file, so you can also directly modify the `.screepsrc` file to specify the server startup options.
 
    ```ini
    ;If you launch the server without running the local Steam client,
@@ -622,7 +617,7 @@ ENTRYPOINT ["npx", "screeps", "start"]
    restart_interval = 3600
    ```
 
-4. 使用如下指令构建镜像：
+4. Use the following command to build image:
 
    ```sh 
    docker build \
@@ -633,7 +628,7 @@ ENTRYPOINT ["npx", "screeps", "start"]
    	.
    ```
 
-5. 使用如下命令运行镜像：
+5. Use the following command to run container:
 
    ```sh
    docker run \
@@ -644,22 +639,22 @@ ENTRYPOINT ["npx", "screeps", "start"]
    	screeps-server:latest
    ```
 
-
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
 ### screeps-launcher
 
-screeps-launcher 使用 `config.yaml`（或 `config.yml`）作为配置文件。以下所有配置项及其默认值都是从 screeps-launcher 源代码中获取得到的。
+screeps-launcher use `config.yaml`（or `config.yml`）as configuration file. The following configuration options and their default values are obtained from the screeps-launcher source code.
 
 ```yml
 # config.yaml
-steamKey: # 你的 Steam API key
-steamKeyFile: "STEAM_KEY" # 存放 Steam API key 的文件路径
-cli: # 配置 screeps-launcher cli，缺省与 screeps cli 相同
+steamKey: # your Steam API key
+steamKeyFile: "STEAM_KEY" # Path to Steam API key file
+cli: # screeps-launcher CLI configuration. Default to screeps cli
   host: "127.0.0.1"
   port: 21026
   username: ""
   password: ""
-env: # 环境变量设置，应用到 screeps 服务器以及 mods 上
+env: # Environment variable configuration. Will be applied to screeps server and mods
   shared:
     MODFILE: "mods.json"
     STORAGE_HOST: "127.0.0.1",
@@ -674,24 +669,24 @@ env: # 环境变量设置，应用到 screeps 服务器以及 mods 上
     DRIVER_MODULE: "@screeps/driver",
   storage:  
     DB_PATH: "db.json",
-processors: # 缺省是当前进程可使用的系统的逻辑 CPU 核心数。runtime.NumCPU()
-runnerthreads: # 缺省 math.Max(1, float64(processors)-1)
-version: "latest" # 指定 screeps 版本。缺省 latest
-nodeVersion: "Erbium" # 指定 Nodejs 版本，缺省 Erbium
-mods: # mod 配置列表
-bots: # bot 配置列表
+processors: # Default to runtime.NumCPU()
+runnerthreads: # Default to math.Max(1, float64(processors)-1)
+version: "latest" # Specified screeps version. Default to latest
+nodeVersion: "Erbium" # Specified Nodejs version. Default to Erbium
+mods: # mod config list
+bots: # bot config list
 extraPackages:
 pinnedPackages:
     ssri: "8.0.1",
-    cacache: "15.3.0",screep
+    cacache: "15.3.0",
     passport-steam: "1.0.17",
     minipass-fetch: "2.1.2",
     express-rate-limit: "6.7.0",
-localMods: "./mods" # 本地 mod 的列表
+localMods: "./mods" # Directory of local mod
 backup: # 配置备份
   dirs: # 备份目录列表
   files: # 备份文件列表
-modules: # screeps 服务器使用的模块，查看 https://github.com/screeps/screeps?tab=readme-ov-file#modules
+modules: # modules used by screeps server, check https://github.com/screeps/screeps?tab=readme-ov-file#modules
   backend: true
   main: true
   processor: true
@@ -703,9 +698,7 @@ modules: # screeps 服务器使用的模块，查看 https://github.com/screeps/
 
 ****
 
-若安装了 [screepsmod-admin-utils](https://github.com/ScreepsMods/screepsmod-admin-utils)，则 `config.yaml` 文件中可以添加`serverConfig` 段。
-
-`screepsmod-admin-utils` 识别的字段与样例值如下：
+If installed [screepsmod-admin-utils](https://github.com/ScreepsMods/screepsmod-admin-utils), you can add a section named `serverConfig` to the `config.yaml` file. The recognized fields and their default values for `screepsmod-admin-utils` are as follows:
 
 ```yaml
 # config.yaml
@@ -718,11 +711,11 @@ serverConfig:
   whitelist: # Does not restrict login, only restricts spawning
   - ags131
   - zeswarm
-  shardName: 'screepsplus1' # 默认宿主机的 hostname
+  shardName: 'screepsplus1' # Default to hostname of host
   constants:
-  	# 默认 1000000
+  	# Default 1000000
   	GCL_MULTIPLY:
-  	# 默认 2.4
+  	# Default 2.4
   	GCL_POW: 
     UPGRADE_POWER: 10
     POWER_CREEP_SPAWN_COOLDOWN: 3600000 # 1 Hour
@@ -731,34 +724,34 @@ serverConfig:
     <h1>Welcome</h1>
     <div>Powered by screepsmod-admin-utils</div>
   statsToken: ...splusToken... # This enables submitting stats to S+ Grafana. Note: shardName MUST be set
-  # 默认 false
+  # Default false
   gclToCPU: true
-  # 默认 300
+  # Default 300
   maxCPU: 100 
-  # 默认 20
+  # Default 20
   baseCPU: 20 
-  # 默认 10
+  # Default 10
   stepCPU: 10
 ```
 
-:bulb: 上述所有字段都是可选的。
+:bulb: All fields above are optional
 
-:bulb:  若要指定 `map` 字段，必须安装 `screepsmod-mong`
+:bulb: To specify the `map` field,  [screepsmod-mongo](https://github.com/ScreepsMods/screepsmod-mongo) must be installed first.
 
-* 请访问 [maps.screepspl.us](https://maps.screepspl.us/) 网站，或者执行 `curl https://maps.screepspl.us/maps/index.json` 直接查看源数据。
-* 每个地图有对应的 `ID` 以及可选的 `Width` 与 `Height`。
-* 若设置 `map` 字段为地图 ID，则会导入对应地图
-* 若设置 `map` 字段为 `random` 或者 `randow_WxH`（例如 `random_1x2`），则会随机导入或者按指定的地图宽高随机导入。
+- For valid `map` value, visit [maps.screepspl.us](https://maps.screepspl.us/), or execute `curl https://maps.screepspl.us/maps/index.json` for source data.
+- Each map has its `ID` and optional `Width` and `Height`.
+  - Specified map ID: screeps will import the corresponding map.
+  - Set as `random` (or `random_WxH`, e.g `random_1x2`): screeps will import a random map (or a random map with the specified width and height).
 
-:bulb: 当服务器启动后，修改`serverConfig` 字段的值会重新加载到服务器中。但是修改 `config.yaml` 的其他字段不会。
+:bulb: After staring up the server, modifying the values of the `serverConfig` field will be reloaded into the server.
 
 
 
 ****
 
-写在 `serverConfig` 段中的所有配置会覆盖 screeps 使用的 `.screepsrc` 配置。以部分 `.screepsrc` 配置与 `screepsmod-mongo` 的配置为例：
+Any configurations written in the `serverConfig` section will override the configurations used by Screeps in the `.screepsrc` file. Here's an example of the same configurations in the `.screepsrc` and `screepsmod-mongo`:
 
-* 在 `.screepsrc` 中：
+* in `.screepsrc`:
 
   ```ini
   ;The port number on which the game server should listen.
@@ -779,7 +772,7 @@ serverConfig:
   port = 6379
   ```
 
-* 在 `config.yaml` 中：
+* in `config.yaml`:
 
   ```yaml
   serverConfig:
@@ -795,19 +788,19 @@ serverConfig:
   		port: 6379
   ```
 
-:bulb: 具体原理：`ini` 文件与 `yaml` 文件都是键值对的形式，因此可以相互转换。而`ini` 文件中使用 `[]` 表示一个节，节内可以存放任意数量的键值对，对应 `yaml` 中的一个嵌套对象，例如：节`[mongo]` 对应 `serverConfig.mongo` 对象。
+:bulb: Specific principle: `ini` files and `yaml` files are both in key-value pair format, and thus can be converted to each other. In an `ini` file, square brackets `[]` are used to indicate a section, which can contain any number of key-value pairs, corresponding to a nested object in `yaml`, for example: the section `[mongo]` corresponds to the `serverConfig.mongo` object.
 
+<p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
+### This Project
 
-### 本项目
+This project is based on screeps-launcher, not aiming to develop a new launcher, but to provide two preset launch methods for players who want to set up a runnable screeps private server in a short time; and to provide some convenient CLI commands for users running services with docker.
 
-本项目基于 screeps-launcher，目的不是为了开发新的启动器，而是为那些想在短时间内搭建起一个可运行的 screeps 私人服务器的玩家们提供两种预设的启动方式；并且为使用 docker 运行服务的用户提供一些便利的脚手架命令。
+Players need to first use `screeps-deploy-wizard init` or the abbreviation `sdw init`, and follow the interactive command line to configure some necessary options. The CLI will generate the necessary files for starting the screeps server based on the selected preset.
 
-玩家需要先使用 `screeps-deploy-wizard init` 或者缩写 `sdw init`，跟随交互式命令行配置一些必要的选项，脚手架会根据选择的预设生成启动 screeps 服务器所必须的文件。
+For players using the Primary preset, they can directly use the `config.yaml` generated by this CLI, refer to the instructions in [screeps-launcher/Usage](https://github.com/screepers/screeps-launcher?tab=readme-ov-file#usage), and use the `screeps-launcher` command to start the server. (You need to download a release from the [Releases](https://github.com/screepers/screeps-launcher/releases) page of screeps-launcher first)
 
-对使用 Primary 预设的玩家，可以直接使用本脚手架生成的 `config.yaml`，参考 [screeps-launcher/Usage](https://github.com/screepers/screeps-launcher?tab=readme-ov-file#usage) 中的说明，使用 `screeps-launcher` 命令启动服务器。（需要先从 screeps-launcher 的 [Releases](https://github.com/screepers/screeps-launcher/releases) 页面下载一份发行版）
-
-对使用 Advanced 预设的玩家，会同时运行 screeps-server，mongo 与 redis 三个容器，并使用 docker compose 进行统一管理。玩家可以使用 `sdw` 提供的命令，简化对服务的管理，或者使用 docker 命令进行更精细的操作。
+For players using the Advanced preset, the screeps-server, mongo, and redis containers will run simultaneously, and docker compose will be used for unified management. Players can use the commands provided by `sdw` to simplify service management, or use docker commands for more fine-grained operations.
 
 <p align="right">[<a href="# Table of contents">↑ back to top</a>]</p>
 
