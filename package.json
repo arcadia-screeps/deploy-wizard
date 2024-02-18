@@ -1,8 +1,8 @@
 {
     "name": "@arcadia-screeps/deploy-wizard",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "license": "GPL-3.0",
-    "description": "A tool-box for containerizing screeps server",
+    "description": "A CLI for screeps server based on screep-launcher",
     "keywords": [
         "cli",
         "server",
